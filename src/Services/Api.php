@@ -37,7 +37,9 @@ class Api
     {
         return match ($status) {
             "CREATED" => TransactionStatus::CREATED,
-            "" => TransactionStatus::FAILED,
+            "OK" => TransactionStatus::OK,
+            "CANCELED" => TransactionStatus::CANCELED,
+            default => TransactionStatus::FAILED
         };
     }
 
