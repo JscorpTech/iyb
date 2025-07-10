@@ -7,9 +7,12 @@ use JscorpTech\IYB\Services\API;
 class IYB
 {
     public API $api;
-    function __construct()
+    function __construct(string $certificate, string $certificate_key)
     {
-        $this->api = new API();
+        $this->api = new API(
+            $certificate,
+            $certificate_key,
+        );
     }
 
     function create_transaction(int $amount)

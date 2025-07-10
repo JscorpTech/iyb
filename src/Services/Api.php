@@ -13,11 +13,11 @@ class API
     public string $certificate_key;
     public string $certificate;
 
-    function __construct()
+    function __construct(string $certificate, string $certificate_key)
     {
         $this->client = new Client();
-        $this->certificate = "./keys/MCertResp.pem";
-        $this->certificate_key = "./keys/ima.key";
+        $this->certificate = $certificate;
+        $this->certificate_key = $certificate_key;
     }
 
     public function parse_response(string $data)
