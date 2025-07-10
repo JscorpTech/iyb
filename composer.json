@@ -1,0 +1,18 @@
+{
+    "name": "jscorptech/iyb",
+    "description": "Ipak yo'li bank uchun sdk",
+    "autoload": {
+        "psr-4": {
+            "JscorpTech\\IYB\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "A'zamov Samandar",
+            "email": "admin@jscorp.uz"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.9"
+    }
+}
