@@ -4,10 +4,9 @@ namespace JscorpTech\IYB\Services;
 
 use Exception;
 use GuzzleHttp\Client;
-use GuzzleHttp\TransferStats;
 use JscorpTech\IYB\Enums\TransactionStatus;
 
-class API
+class Api
 {
     public const BASE_URL = "https://etest.ipakyulibank.uz:4443/ecomm2/MerchantHandler";
     public Client $client;

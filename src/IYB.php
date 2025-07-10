@@ -3,14 +3,14 @@
 namespace Jscorptech\IYB;
 
 use JscorpTech\IYB\Enums\TransactionStatus;
-use JscorpTech\IYB\Services\API;
+use JscorpTech\IYB\Services\Api;
 
 class IYB
 {
-    public API $api;
+    public Api $api;
     function __construct(string $certificate, string $certificate_key)
     {
-        $this->api = new API(
+        $this->api = new Api(
             $certificate,
             $certificate_key,
         );
