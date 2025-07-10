@@ -2,6 +2,7 @@
 
 namespace Jscorptech\IYB;
 
+use JscorpTech\IYB\Enums\TransactionStatus;
 use JscorpTech\IYB\Services\API;
 
 class IYB
@@ -17,7 +18,10 @@ class IYB
 
     function create_transaction(int $amount)
     {
-        $res = $this->api->create_transaction(10000, description: "Ishladi");
-        print_r($res);
+        return $this->api->create_transaction(10000, description: "Ishladi");
+    }
+
+    public function check_transaction(string $trans_id): TransactionStatus{
+        return $this->api->check_transaction_status($trans_id);
     }
 }

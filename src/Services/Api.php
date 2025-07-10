@@ -4,7 +4,8 @@ namespace JscorpTech\IYB\Services;
 
 use Exception;
 use GuzzleHttp\Client;
-use Jscorptech\IYB\Enums\TransactionStatus;
+use GuzzleHttp\TransferStats;
+use JscorpTech\IYB\Enums\TransactionStatus;
 
 class API
 {
@@ -37,7 +38,7 @@ class API
     {
         return match ($status) {
             "CREATED" => TransactionStatus::CREATED,
-            null => TransactionStatus::FAILED,
+            "" => TransactionStatus::FAILED,
         };
     }
 
@@ -63,10 +64,10 @@ class API
             throw new Exception("Error creating transaction: " . $e->getMessage());
         }
     }
-    public function check_status(string $trans_id)
+    public function check_transaction_status(string $trans_id): TransactionStatus
     {
         $data = http_build_query([
-            "command" => "v",
+            "command" => "c",
             "trans_id" => $trans_id,
         ]);
         $url = self::BASE_URL . "?$data";
@@ -76,7 +77,11 @@ class API
                 "ssl_key" => $this->certificate_key,
                 "verify" => false
             ]);
-            return $this->parse_transaction_status($this->parse_response($response->getBody()->getContents())["RESULT"] ?? null);
+            $data = $this->parse_response($response->getBody()->getContents());
+            if (!isset($data['RESULT'])) {
+                throw new Exception($data['error'] ?? "Unknown error");
+            }
+            return $this->parse_transaction_status($data["RESULT"] ?? "");
         } catch (\Exception $e) {
             throw new Exception("Error creating transaction: " . $e->getMessage());
         }

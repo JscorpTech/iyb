@@ -3,6 +3,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+use JscorpTech\IYB\Enums\TransactionStatus;
 use JscorpTech\IYB\IYB;
 
 $iyb = new Iyb(
@@ -10,4 +11,5 @@ $iyb = new Iyb(
     "./keys/ima.key",
 );
 
-print_r($iyb->create_transaction(1000));
+$trans_id = $iyb->create_transaction(1000);
+print_r($iyb->check_transaction($trans_id) == TransactionStatus::CREATED);
