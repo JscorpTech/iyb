@@ -18,10 +18,11 @@ class IYB
 
     function create_transaction(int $amount)
     {
-        return $this->api->create_transaction(10000, description: "Ishladi");
+        return $this->api->create_transaction($amount, "Order");
     }
 
-    public function check_transaction(string $trans_id): TransactionStatus{
+    public function check_transaction(string $trans_id): TransactionStatus
+    {
         return $this->api->check_transaction_status($trans_id);
     }
 }
