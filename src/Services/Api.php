@@ -13,7 +13,7 @@ class Api
     public string $certificate_key;
     public string $certificate;
 
-    function __construct(string $certificate, string $certificate_key)
+    public function __construct(string $certificate, string $certificate_key)
     {
         $this->client = new Client();
         $this->certificate = $certificate;
@@ -43,7 +43,10 @@ class Api
         };
     }
 
-    function create_transaction(int $amount, string $ip = "1.2.3.4", string $description = "No Description", string $lang = "UZ", $currency = "860")
+    /**
+     * Yangi transaction yaratish
+     */
+    public function create_transaction(int $amount, string $ip = "1.2.3.4", string $description = "No Description", string $lang = "UZ", $currency = "860")
     {
         $data = http_build_query([
             "command" => "v",
@@ -65,6 +68,10 @@ class Api
             throw new Exception("Error creating transaction: " . $e->getMessage());
         }
     }
+
+    /**
+     *Transaction holatini tekshirish
+     */
     public function check_transaction_status(string $trans_id): TransactionStatus
     {
         $data = http_build_query([

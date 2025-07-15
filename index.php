@@ -4,12 +4,12 @@
 require __DIR__ . '/vendor/autoload.php';
 
 use JscorpTech\IYB\Enums\TransactionStatus;
-use JscorpTech\IYB\IYB;
+use JscorpTech\IYB\Services\Api;
 
-$iyb = new Iyb(
+$iyb = new Api(
     "./keys/MCertResp.pem",
     "./keys/ima.key",
 );
 
 $trans_id = $iyb->create_transaction(1000);
-print_r($iyb->check_transaction($trans_id) == TransactionStatus::CREATED);
+print_r($iyb->check_transaction_status($trans_id) == TransactionStatus::CREATED);
